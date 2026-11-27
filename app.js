@@ -174,7 +174,7 @@
         'data-week': String(w),
       }, lit ? flame('candle-flame', w) : el('span', { class: 'candle-flame unlit' }),
       el('span', { class: 'candle-body' }),
-      el('span', { class: 'candle-label' }, week.theme));
+      el('span', { class: 'candle-label' }, el('span', { class: 'candle-week' }, `Week ${w + 1}`), week.theme));
     };
     const christLit = t >= christmas;
     const christ = el('span', {
@@ -182,7 +182,7 @@
       title: christLit ? 'The Christ candle' : 'The Christ candle is lit on Christmas Day',
     }, christLit ? flame('candle-flame', 'christ') : el('span', { class: 'candle-flame unlit' }),
     el('span', { class: 'candle-body' }),
-    el('span', { class: 'candle-label' }, 'Christ'));
+    el('span', { class: 'candle-label' }, el('span', { class: 'candle-week' }, 'Dec 25'), 'Christ'));
     nav.replaceChildren(candle(0), candle(1), christ, candle(2), candle(3));
   }
 
