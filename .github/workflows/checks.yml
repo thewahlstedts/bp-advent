@@ -1,0 +1,24 @@
+name: checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Checks
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            node tools/check.mjs --base "origin/${{ github.base_ref }}"
+          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            node tools/check.mjs --base "${{ github.event.before }}"
+          else
+            node tools/check.mjs
+          fi

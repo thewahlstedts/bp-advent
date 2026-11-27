@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Advent 2026</title>
+  <meta name="description" content="Daily Advent readings and reflection questions for the family, from BibleProject's Advent 2026 calendar.">
+  <meta name="theme-color" content="#3b1820">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Advent">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/icon-180.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg width="0" height="0" class="defs" aria-hidden="true">
+    <symbol id="flame" viewBox="0 0 60 120">
+      <path fill="#e8452c" d="M30 2C22 22 6 40 6 66c0 16 10 28 24 28s24-12 24-28C54 40 38 22 30 2z"/>
+      <path fill="#f48532" d="M30 18c-6 16-17 30-17 50 0 12 7 21 17 21s17-9 17-21c0-20-11-34-17-50z"/>
+      <path fill="#f9c633" d="M30 36c-4 12-11 22-11 35 0 9 5 15 11 15s11-6 11-15c0-13-7-23-11-35z"/>
+      <path fill="#f8f246" d="M30 56c-2 7-6 12-6 19 0 5 3 8 6 8s6-3 6-8c0-7-4-12-6-19z"/>
+      <rect fill="#f8f246" x="28" y="78" width="4" height="20" rx="1"/>
+      <rect fill="#3a2a1a" x="28.5" y="96" width="3" height="22" rx="1"/>
+    </symbol>
+  </svg>
+
+  <header class="art">
+    <img src="img/nativity.jpg" width="1400" height="594" alt="Illustration of Mary and Joseph with the newborn Jesus in Bethlehem under a bright star">
+  </header>
+
+  <nav class="candles" id="candles" aria-label="Weeks of Advent"></nav>
+
+  <div class="status">
+    <p class="greeting" id="greeting" hidden></p>
+    <div class="progress" id="progress" aria-live="polite"></div>
+  </div>
+
+  <main id="week"></main>
+
+  <footer class="site-footer">
+    <a class="bp-logo" href="https://bibleproject.com/" target="_blank" rel="noopener noreferrer">
+      <img src="img/bibleproject-white.png" width="589" height="202" alt="BibleProject">
+    </a>
+    <p class="credit">
+      From <a href="https://bibleproject.com/collections/advent/" target="_blank" rel="noopener noreferrer"><cite>Advent 2026</cite></a>
+      by <a href="https://bibleproject.com/" target="_blank" rel="noopener noreferrer">BibleProject</a>.
+      Not affiliated with BibleProject.
+    </p>
+    <button type="button" class="link-btn" id="about-open">About</button>
+  </footer>
+
+  <dialog id="about" aria-labelledby="about-title">
+    <img class="about-art" src="img/nativity.jpg" width="1400" height="594" alt="">
+    <div class="about-body">
+      <h2 id="about-title" tabindex="-1" autofocus>Advent 2026</h2>
+      <div id="about-intro"></div>
+      <p><a class="explore" href="https://bibleproject.com/collections/advent/" target="_blank" rel="noopener noreferrer">Explore more at BibleProject</a></p>
+      <h3>Using this</h3>
+      <ul>
+        <li>Tap a Reading to open it in Logos.</li>
+        <li>Talk through the question together, then tap the circle to mark the day done.</li>
+        <li>Tap a candle to see that week.</li>
+        <li>On iPhone, use Share &rarr; Add to Home Screen so it opens like an app and works offline.</li>
+      </ul>
+      <p class="credit">
+        Readings and reflection questions from <a href="https://bibleproject.com/collections/advent/" target="_blank" rel="noopener noreferrer"><cite>Advent 2026</cite></a>
+        by <a href="https://bibleproject.com/" target="_blank" rel="noopener noreferrer">BibleProject</a>, shared for personal, non-commercial use.
+        This is a family project and is not affiliated with or endorsed by BibleProject.
+      </p>
+      <button type="button" class="close-btn" id="about-close">Close</button>
+    </div>
+  </dialog>
+
+  <script src="calendar.js"></script>
+  <script src="logos-refs.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
