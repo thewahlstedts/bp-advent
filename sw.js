@@ -1,7 +1,7 @@
 // Service worker: keeps the whole app available offline.
 // Network first (so a deploy shows up on the next open), falling back to the cache after 3 s or when offline.
 // Bump CACHE whenever a file in SHELL changes; tools/check.mjs enforces this.
-const CACHE = 'advent-2026-v7';
+const CACHE = 'advent-2026-v8';
 const SHELL = [
   './',
   'index.html',
