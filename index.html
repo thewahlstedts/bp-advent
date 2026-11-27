@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self' https://rnpuwanpgundhfmvzrne.supabase.co; base-uri 'none'; form-action 'none'">
   <meta name="robots" content="noindex, nofollow">
   <meta name="referrer" content="no-referrer">
   <title>Advent 2026</title>
@@ -42,6 +42,19 @@
 
   <main id="week"></main>
 
+  <section class="remind" id="remind" aria-labelledby="remind-title">
+    <h2 id="remind-title">Daily reminder</h2>
+    <label class="remind-row">
+      <span>Remind me each day</span>
+      <input type="checkbox" id="remind-on" role="switch">
+    </label>
+    <label class="remind-row" id="remind-time-row" hidden>
+      <span>Time</span>
+      <input type="time" id="remind-time" value="18:30" step="300">
+    </label>
+    <p class="remind-hint" id="remind-hint"></p>
+  </section>
+
   <footer class="site-footer">
     <a class="bp-logo" href="https://bibleproject.com/" target="_blank" rel="noopener noreferrer">
       <img src="img/bibleproject-white.png" width="589" height="202" alt="BibleProject">
@@ -65,6 +78,7 @@
         <li>Tap a Reading to open it in Logos.</li>
         <li>Talk through the question together, then tap the circle to mark the day done.</li>
         <li>Tap a candle to see that week.</li>
+        <li>Turn on the daily reminder to get each day&rsquo;s reading and question as a notification. It&rsquo;s skipped if you&rsquo;ve already marked the day done on that phone.</li>
         <li>On iPhone, use Share &rarr; Add to Home Screen so it opens like an app and works offline.</li>
       </ul>
       <p class="credit">
@@ -79,5 +93,6 @@
   <script src="calendar.js"></script>
   <script src="logos-refs.js"></script>
   <script src="app.js"></script>
+  <script src="reminder.js"></script>
 </body>
 </html>

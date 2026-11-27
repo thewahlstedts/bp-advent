@@ -239,12 +239,20 @@
 
   renderAbout();
   render();
-  const todayRow = document.getElementById('day-' + today());
-  if (todayRow) requestAnimationFrame(() => todayRow.scrollIntoView({ block: 'center' }));
+  // #YYYY-MM-DD (from a tapped Reminder) shows that Day; otherwise today.
+  function showDay(date) {
+    const day = days.find((d) => d.date === date);
+    if (day && day.week !== shownWeek) { shownWeek = day.week; render(); }
+    const row = document.getElementById('day-' + date);
+    if (row) requestAnimationFrame(() => row.scrollIntoView({ block: 'center' }));
+  }
+  const hashDate = () => (/^#(\d{4}-\d{2}-\d{2})$/.exec(location.hash) || [])[1];
+  window.addEventListener('hashchange', () => { if (hashDate()) showDay(hashDate()); });
+  showDay(hashDate() || today());
 
-  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) {
     navigator.serviceWorker.register('sw.js').catch(() => {});
   }
 
-  window.advent = { days, isDone, today };
+  window.advent = { days, isDone, today, lastDate };
 })();

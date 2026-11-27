@@ -13,6 +13,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Reminder tests
+        run: node tools/test_reminders.mjs
       - name: Checks
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then

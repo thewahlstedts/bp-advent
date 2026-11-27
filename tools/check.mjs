@@ -4,7 +4,8 @@
 // - no inline scripts or on…= handlers (the CSP forbids them)
 // - the Calendar is well formed: 27 consecutive Days, every Reading becomes a ref.ly link
 // - if a SHELL file changed since --base, the CACHE name in sw.js changed too
-import { readFileSync, existsSync } from 'node:fs';
+// - supabase/functions/_shared/calendar.ts matches calendar.js (--write regenerates it)
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 import vm from 'node:vm';
@@ -46,6 +47,15 @@ all.forEach(([date, reading, question], i) => {
   if (!question || !question.trim().endsWith('?') && !question.trim().endsWith('.')) fail(`Day ${date} has no Reflection Question`);
 });
 if (all.at(-1)[0] !== `${CALENDAR.year}-12-25`) fail('The last Day should be Christmas Day');
+
+// The Reminder function needs the Calendar too; it gets a generated copy.
+const CAL_TS = 'supabase/functions/_shared/calendar.ts';
+const calTs = '// Generated from calendar.js by `node tools/check.mjs --write`. Do not edit.\n'
+  + "import type { Calendar } from './advent.ts';\n\n"
+  + 'export const CALENDAR: Calendar = '
+  + JSON.stringify({ year: CALENDAR.year, weeks: CALENDAR.weeks.map((w) => ({ theme: w.theme, days: w.days })) }, null, 2) + ';\n';
+if (process.argv.includes('--write')) writeFileSync(CAL_TS, calTs);
+else if (!existsSync(CAL_TS) || readFileSync(CAL_TS, 'utf8') !== calTs) fail(`${CAL_TS} is out of date: run node tools/check.mjs --write`);
 
 const baseIdx = process.argv.indexOf('--base');
 if (baseIdx > 0) {
