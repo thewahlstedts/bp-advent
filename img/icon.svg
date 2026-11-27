@@ -7,7 +7,7 @@
     <path fill="#f8f246" d="M30 56c-2 7-6 12-6 19 0 5 3 8 6 8s6-3 6-8c0-7-4-12-6-19z"/>
     <rect fill="#f8f246" x="28" y="78" width="4" height="20" rx="1"/>
     <rect fill="#1e1415" x="28.5" y="96" width="3" height="18" rx="1"/>
-    <rect fill="#fbf3ea" x="13" y="112" width="34" height="58" rx="3"/>
-    <rect fill="#000" fill-opacity="0.12" x="39" y="112" width="8" height="58" rx="3"/>
   </g>
+  <path fill="#fbf3ea" d="M184 512V321q0-7 7-7h130q7 0 7 7v191z"/>
+  <path fill="#000" fill-opacity="0.12" d="M304 314h17q7 0 7 7v191h-24z"/>
 </svg>
