@@ -155,8 +155,6 @@
     document.body.style.setProperty('--deep', c.deep);
     document.body.style.setProperty('--stroke', c.stroke);
     document.body.style.setProperty('--glow', c.glow);
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', c.bg);
   }
 
   function renderCandles() {

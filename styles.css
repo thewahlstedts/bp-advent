@@ -51,8 +51,19 @@ body::before {
 a { color: inherit; }
 
 /* ---- header art ---- */
+/* The night sky continues above the picture, up under the phone's status bar
+   (the page is drawn there thanks to viewport-fit=cover): the picture's top
+   colour plus a strip of our own stars. */
+html { background: #22374c; }
 .art {
   width: 100%;
+  background: #22374c;
+}
+.art::before {
+  content: "";
+  display: block;
+  height: env(safe-area-inset-top, 0px);
+  background: url("img/stars.svg") repeat-x center / auto 100%;
 }
 .art img {
   display: block;

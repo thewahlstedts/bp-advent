@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="70" viewBox="0 0 420 70">
+  <defs>
+    <path id="s" d="M0-1L.22-.22 1 0 .22.22 0 1-.22.22-1 0-.22-.22z" fill="#f9c633"/>
+  </defs>
+  <use href="#s" transform="translate(28 22) scale(5)"/>
+  <use href="#s" transform="translate(96 48) scale(3.5)"/>
+  <use href="#s" transform="translate(150 14) scale(4)"/>
+  <use href="#s" transform="translate(212 38) scale(6)"/>
+  <use href="#s" transform="translate(268 18) scale(3)"/>
+  <use href="#s" transform="translate(318 52) scale(4.5)"/>
+  <use href="#s" transform="translate(372 26) scale(3.5)"/>
+  <circle cx="60" cy="58" r="1" fill="#f9c633" opacity=".7"/>
+  <circle cx="182" cy="60" r="1" fill="#f9c633" opacity=".6"/>
+  <circle cx="240" cy="8" r="1" fill="#f9c633" opacity=".7"/>
+  <circle cx="404" cy="56" r="1" fill="#f9c633" opacity=".6"/>
+</svg>
