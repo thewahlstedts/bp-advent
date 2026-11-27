@@ -17,16 +17,36 @@
 html { -webkit-text-size-adjust: 100%; }
 
 body {
+  position: relative;
+  z-index: 0;
   margin: 0;
   min-height: 100vh;
-  background: var(--bg);
+  background: var(--deep, var(--bg));
   color: #fff;
   font-family: var(--sans);
   line-height: 1.45;
   transition: background-color 0.4s ease;
 }
 
-.defs { position: absolute; }
+/* The Week's background, after the PDF pages: a darker band down the left edge,
+   broad lighter brush strokes, a warm highlight in the top corner and fine streaks.
+   Our own gradients in the PDF's colors (BibleProject's artwork isn't used behind text). */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(70% 38% at 100% 0%, color-mix(in srgb, var(--glow) 55%, transparent) 0%, transparent 70%),
+    radial-gradient(60% 45% at 0% 100%, color-mix(in srgb, var(--glow) 35%, transparent) 0%, transparent 70%),
+    radial-gradient(55% 90% at 92% 55%, color-mix(in srgb, var(--stroke) 70%, transparent) 0%, transparent 65%),
+    radial-gradient(45% 70% at 12% 30%, color-mix(in srgb, var(--stroke) 55%, transparent) 0%, transparent 60%),
+    linear-gradient(90deg, var(--deep) 0%, transparent 18%, transparent 82%, color-mix(in srgb, var(--deep) 60%, transparent) 100%),
+    repeating-linear-gradient(118deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 11px, rgba(0, 0, 0, 0.04) 11px 13px, transparent 13px 23px);
+  transition: background-color 0.4s ease;
+}
 
 a { color: inherit; }
 
@@ -61,10 +81,12 @@ a { color: inherit; }
   flex-direction: column;
   align-items: center;
   gap: 3px;
-  padding: 4px 6px 6px;
-  border: 0;
+  min-width: 58px;
+  padding: 6px 8px 7px;
+  border: 1.5px solid transparent;
   border-radius: 10px;
-  background: none;
+  background: linear-gradient(160deg, var(--panel-stroke, transparent), var(--panel, transparent) 70%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   color: #fff;
   font: inherit;
   cursor: pointer;
@@ -97,16 +119,44 @@ a { color: inherit; }
   opacity: 0.8;
 }
 .candle.current .candle-label { opacity: 1; font-weight: 700; }
-.candle.current .candle-body { outline: 2px solid #fff; outline-offset: 2px; }
-.candle.lit .candle-flame { animation: flicker 3s ease-in-out infinite; transform-origin: 50% 90%; }
-@keyframes flicker {
-  0%, 100% { transform: scale(1, 1) rotate(0); }
-  30% { transform: scale(0.96, 1.04) rotate(-1.5deg); }
-  60% { transform: scale(1.03, 0.97) rotate(1deg); }
+.candle.current { border-color: #fff; }
+.candle.christ { background: none; box-shadow: none; min-width: 0; }
+/* Flames flicker: the whole flame sways while each layer stretches on its own rhythm. */
+.flame { overflow: visible; }
+.flame path { transform-box: view-box; transform-origin: 30px 118px; }
+.flame { animation: sway 3.2s ease-in-out infinite; transform-origin: 50% 80%; }
+.flame .flame-outer { animation: lick 1.7s ease-in-out infinite; }
+.flame .flame-body { animation: lick-soft 1.3s ease-in-out infinite reverse; }
+.flame .flame-inner { animation: lick-soft 1.1s ease-in-out infinite 0.2s; }
+.flame .flame-top { animation: float 1.6s ease-in-out infinite; }
+.flame .flame-wick { animation: none; }
+.card-flame { filter: drop-shadow(0 0 10px rgba(249, 198, 51, 0.55)); animation: sway 3.2s ease-in-out infinite, glow 2.3s ease-in-out infinite; }
+@keyframes sway {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-2deg); }
+  60% { transform: rotate(1.5deg); }
+}
+@keyframes lick {
+  0%, 100% { transform: scale(1, 1) skewX(0deg); }
+  30% { transform: scale(0.94, 1.07) skewX(-2deg); }
+  65% { transform: scale(1.04, 0.95) skewX(1.5deg); }
+}
+@keyframes lick-soft {
+  0%, 100% { transform: scale(1, 1) skewX(0deg); }
+  30% { transform: scale(0.97, 1.03) skewX(-1deg); }
+  65% { transform: scale(1.02, 0.97) skewX(1deg); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
+  50% { transform: translateY(-3px) scale(0.92, 1.08); opacity: 0.85; }
+}
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(249, 198, 51, 0.45)); }
+  50% { filter: drop-shadow(0 0 16px rgba(249, 198, 51, 0.75)); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .candle.lit .candle-flame { animation: none; }
-  body { transition: none; }
+  .flame, .flame path, .card-flame { animation: none; }
+  body, body::before { transition: none; }
 }
 
 /* ---- greeting + progress ---- */
@@ -175,7 +225,7 @@ main {
   width: 46px;
   height: 92px;
   margin-left: -23px;
-  margin-bottom: -6px;
+  margin-bottom: -2px;
 }
 .week-tag {
   position: absolute;
